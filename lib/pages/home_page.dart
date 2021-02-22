@@ -1,6 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:flutter30dayschallenge/pages/day8.dart';
 
 class HomePage extends StatelessWidget {
+ final UserData userData;
+
+  const HomePage({this.userData});
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -21,7 +26,7 @@ class HomePage extends StatelessWidget {
                 topRight: Radius.circular(50),
               )),
           child: Text(
-            "flutter 30 days challenge",
+            "username:${userData.username},userId ${userData.userId}",
             style: TextStyle(
                 fontSize: 20,
                 color: Colors.white,
