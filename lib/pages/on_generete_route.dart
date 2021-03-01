@@ -12,6 +12,8 @@ import 'day10/animated_builder_example.dart';
 import 'day10/animated_widget_example.dart';
 import 'day10/simple_animation_example.dart';
 import 'day10/simple_basic_aniamtion.dart';
+import 'day11/animated_drawer_home.dart';
+import 'day11/simple_drawer_home.dart';
 import 'day8.dart';
 import 'grid_view_example.dart';
 import 'home_page.dart';
@@ -25,7 +27,7 @@ class OnGenerateRoute{
 
     if (settings.name=="/"){
       return MaterialPageRoute(
-          builder: (_) => SimpleAnimationExample()
+          builder: (_) => AnimatedDrawerHome()
       );
     }else if (settings.name=="/signup"){
       return MaterialPageRoute(
