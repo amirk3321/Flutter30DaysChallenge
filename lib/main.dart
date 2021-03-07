@@ -26,7 +26,7 @@ class MyApp extends StatelessWidget{
       ),
       themeMode: ThemeMode.dark,
       darkTheme: ThemeData(
-        primarySwatch: Colors.green,
+        primarySwatch: Colors.red,
       ),
       initialRoute: "/",
       // routes: {

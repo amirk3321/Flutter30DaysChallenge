@@ -3,5 +3,9 @@ class Assets {
   Assets._();
 
   static const String assetsBird = 'assets/bird.png';
+  static const String assetsEtechviral = 'assets/etechviral.png';
+  static const String assetsLogo = 'assets/logo.png';
+  static const String assetsYoutubeLogo = 'assets/youtube_logo.png';
+  static const String assetsYoutubeSearch = 'assets/youtube_search.json';
 
 }

@@ -7,6 +7,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter30dayschallenge/pages/list_view_exmaple.dart';
 import 'package:flutter30dayschallenge/pages/page_view_builder_example.dart';
 import 'package:flutter30dayschallenge/pages/sign_up_page.dart';
+import 'package:flutter30dayschallenge/pages/youtube_search/youtube_search_page.dart';
 
 import 'day10/animated_builder_example.dart';
 import 'day10/animated_widget_example.dart';
@@ -27,7 +28,7 @@ class OnGenerateRoute{
 
     if (settings.name=="/"){
       return MaterialPageRoute(
-          builder: (_) => AnimatedDrawerHome()
+          builder: (_) => YoutubeSearchPage()
       );
     }else if (settings.name=="/signup"){
       return MaterialPageRoute(
