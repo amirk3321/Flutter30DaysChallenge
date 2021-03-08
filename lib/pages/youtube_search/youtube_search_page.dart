@@ -3,6 +3,7 @@ import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter30dayschallenge/pages/youtube_search/model/item_data.dart';
 
 import 'model/youtube_search_Model.dart';
 
@@ -13,8 +14,9 @@ class YoutubeSearchPage extends StatefulWidget {
 
 class _YoutubeSearchPageState extends State<YoutubeSearchPage> {
   bool _isSearch = false;
+  bool _isLoading=true;
   int navIndex = 0;
-
+  List<ItemData> items=[];
 
   @override
   void initState() {
@@ -23,10 +25,19 @@ class _YoutubeSearchPageState extends State<YoutubeSearchPage> {
   }
 
   Future<void> _loadMockDataFromAssets()async{
+
+    Future.delayed(Duration(seconds: 3),(){
+      setState(() {
+        _isLoading=false;
+      });
+    });
+
     final assetsData=await rootBundle.loadString("assets/youtube_search.json");
 
     final response=YoutubeSearchModel.fromJson(json.decode(assetsData));
 
+
+    items=response.items;
     print(response.items[0].snippet.thumbnails.high.url);
   }
 
@@ -132,39 +143,42 @@ class _YoutubeSearchPageState extends State<YoutubeSearchPage> {
           BottomNavigationBarItem(icon: Icon(Icons.wysiwyg), label: "Libray"),
         ],
       ),
-      body: ListView.builder(
-        itemCount: 8,
+      body: _isLoading==true?Center(child: CircularProgressIndicator(),):ListView.builder(
+        itemCount: items.length,
         itemBuilder: (context, index) {
-          return Container(
-            height: 280,
-            child: Card(
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Container(
-                    height: 200,
-                    width: double.infinity,
-                    color: Colors.grey,
-                    child: Center(
-                      child: Text("thumb Image"),
+          return InkWell(
+            onTap: (){
+              Navigator.pushNamed(context, "/playVideo",arguments: items[index]);
+            },
+            child: Container(
+              height: 280,
+              child: Card(
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Container(
+                      height: 200,
+                      width: double.infinity,
+                      color: Colors.grey,
+                      child: Image.network(items[index].snippet.thumbnails.medium.url,fit: BoxFit.cover,),
                     ),
-                  ),
-                  SizedBox(
-                    height: 8,
-                  ),
-                  Text(
-                    "Title",
-                    maxLines: 2,
-                    style: TextStyle(fontSize: 16, fontWeight: FontWeight.w500),
-                  ),
-                  SizedBox(
-                    height: 4,
-                  ),
-                  Text(
-                    "Channel Title",
-                    style: TextStyle(fontSize: 14, fontWeight: FontWeight.w400),
-                  ),
-                ],
+                    SizedBox(
+                      height: 8,
+                    ),
+                    Text(
+                      "${items[index].snippet.title}",
+                      maxLines: 2,
+                      style: TextStyle(fontSize: 16, fontWeight: FontWeight.w500),
+                    ),
+                    SizedBox(
+                      height: 4,
+                    ),
+                    Text(
+                      "${items[index].snippet.channelTitle}",
+                      style: TextStyle(fontSize: 14, fontWeight: FontWeight.w400),
+                    ),
+                  ],
+                ),
               ),
             ),
           );

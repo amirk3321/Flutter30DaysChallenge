@@ -7,6 +7,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter30dayschallenge/pages/list_view_exmaple.dart';
 import 'package:flutter30dayschallenge/pages/page_view_builder_example.dart';
 import 'package:flutter30dayschallenge/pages/sign_up_page.dart';
+import 'package:flutter30dayschallenge/pages/youtube_search/model/item_data.dart';
+import 'package:flutter30dayschallenge/pages/youtube_search/play_video.dart';
 import 'package:flutter30dayschallenge/pages/youtube_search/youtube_search_page.dart';
 
 import 'day10/animated_builder_example.dart';
@@ -30,6 +32,23 @@ class OnGenerateRoute{
       return MaterialPageRoute(
           builder: (_) => YoutubeSearchPage()
       );
+    }else if (settings.name=="/playVideo"){
+      if (args is ItemData) {
+        return MaterialPageRoute(
+            builder: (_) => PlayVideo(item: args,)
+        );
+      }else{
+        return MaterialPageRoute(
+            builder: (_) => Scaffold(
+              appBar: AppBar(
+                title: Text("error"),
+              ),
+              body: Center(
+                child: Text("error"),
+              ),
+            )
+        );
+      }
     }else if (settings.name=="/signup"){
       return MaterialPageRoute(
           builder: (_) => SignUpPage()
